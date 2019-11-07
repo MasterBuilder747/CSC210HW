@@ -7,18 +7,13 @@ public class HW6ArraysMethods {
 
     public static void main(String[] args) {
 
-        //notes
-        //standard method: srt((sum(xi^2)/N) - (sum(xi)/N))^2)
-        //Welford: 𝜇2,𝑛 = 𝜇2,𝑛−1 + (𝑥𝑛 − 𝑥̅𝑛)(𝑥𝑛 − 𝑥̅𝑛−1)
-        //
-
         //take user inputs for number generation
         Scanner kb = new Scanner(System.in);
         long seed = 0;
         try {
             System.out.println("Enter the seed: ");
             seed = kb.nextLong();
-        }catch(Exception e) {
+        } catch (Exception e) {
             System.out.println("Invalid range or data type.");
         }
         Random r = new Random(seed);
@@ -26,73 +21,76 @@ public class HW6ArraysMethods {
         try {
             System.out.println("Enter the number of values: ");
             N = kb.nextInt();
-        }catch(Exception e) {
+        } catch (Exception e) {
             System.out.println("Invalid range or data type.");
         }
         float min = 0;
         try {
             System.out.println("Enter the minimum value: ");
             min = kb.nextFloat();
-        }catch(Exception e) {
+        } catch (Exception e) {
             System.out.println("Invalid range or data type.");
         }
         float max = 0;
         try {
             System.out.println("Enter the maximum value: ");
             max = kb.nextFloat();
-        }catch(Exception e) {
+        } catch (Exception e) {
             System.out.println("Invalid range or data type.");
+        }
+        if (min > max) {
+            float x = max;
+            max = min;
+            min = x;
         }
 
         //generate random numbers and store it in an array
         double[] a = new double[N];
-
-        
-
-
-        //linear interpolation:
-        // y - y1 = ((y2 - y1) / (x2 - x1)) * (x - x1)
+        for (int i = 0; i < a.length; i++) {
+            //this is linear interpolation
+            double rand = min + (Math.abs(max - min) * r.nextDouble());
+            a[i] = rand;
+            System.out.println(a[i]);
+        }
 
         //output the result using both std methods
-        System.out.println("Standard deviation using standard method: " + stdS(a));
-        System.out.println("Standard deviation using Welford method: " + stdW(a));
+        System.out.println("Standard deviation using Standard method: " + stdS(a));
+        System.out.println("Standard deviation using  Welford method: " + stdW(a));
     }
 
-    public static double stdS(double a[]) {
-        double std = 0;
+    public static double stdS(double[] a) {
+        double sum1 = 0;
+        double sum2 = 0;
+        int N = a.length;
 
+        for (double v : a) {
+            sum1 =+ Math.pow(v, 2);
+        }
+        sum1 = sum1 / N;
 
+        for (double v : a) {
+            sum2 =+ v;
+        }
+        sum2 = sum2 / N;
+        sum2 = Math.pow(sum2, 2);
 
-        return std;
+        return Math.sqrt(sum1 - sum2);
     }
 
     public static double stdW(double a[]) {
-        double std = 0;
+        double mean = 0;
+        double mean2 = 0;
+        double delta;
+        double N = a.length;
+        int j = 0;
 
-
-        int i = 0;
-        int mean = 0;
-        int M2 = 0;
-        /*
-        for () {
-
+        for (double v : a) {
+            j = j + 1;
+            delta = v - mean;
+            mean = mean + (delta / j); //change to N
+            mean2 = mean2 + delta * (v - mean);
         }
-        */
-
-
-        /*
-        i = 0
-        mean = 0
-        M2 = 0
-        for all N samples x in the data set
-        i = i + 1
-        delta = x – mean
-        mean = mean + (delta / i)
-        M2 = M2 + delta * (x – mean)
-        stddev = sqrt(M2 / (i – 1))
-         */
-
-        return std;
+        return Math.sqrt(mean2 / (N - 1));
     }
 
 }
