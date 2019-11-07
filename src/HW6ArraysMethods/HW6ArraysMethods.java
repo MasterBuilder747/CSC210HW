@@ -58,7 +58,6 @@ public class HW6ArraysMethods {
                 //this is linear interpolation
                 double rand = min + (Math.abs(max - min) * r.nextDouble());
                 a[i] = rand;
-                System.out.println(a[i]);
             }
 
             //output the result using both std methods
@@ -91,11 +90,12 @@ public class HW6ArraysMethods {
         double N = a.length;
         int j = 0;
 
-        for (double v : a) {
+        for (int i = 0; i < a.length; ++i) {
+            //mean2 = mean2(n-1) + (x - mean)(x - mean(n-1))
             j = j + 1;
-            delta = v - mean;
-            mean = mean + (delta / j); //change to N
-            mean2 = mean2 + (delta * (v - mean));
+            delta = a[i] - mean;
+            mean = mean + (delta / j);
+            mean2 = mean2 + (delta * (a[i] - mean));
         }
         return Math.sqrt(mean2 / (N - 1));
     }
