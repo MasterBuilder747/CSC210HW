@@ -94,10 +94,13 @@ public class ComplexNumber {
             return new ComplexNumber(r, i);
         }
     }
+    //other operations that return a complex number
     public ComplexNumber conj() {
         //returns the conjugate of this
         // 𝑐𝑜𝑛𝑗(𝑎 + 𝑏𝑖) = 𝑎 − 𝑏𝑖
-
+        double a = this.real;
+        double b = this.imaginary * -1;
+        return new ComplexNumber(a, b);
     }
     public ComplexNumber sqrt() {
         //returns the square root of this
@@ -109,15 +112,31 @@ public class ComplexNumber {
             //if a < 0:
                 //√(𝑎 + 𝑏𝑖) = (0 ± √−𝑎𝑖)
 
+        //NOTE; square root always results in ±
+        if (this.imaginary != 0) {
+            double a = Math.sqrt(this.real + Math.sqrt(Math.pow(this.real, 2) + Math.pow(this.imaginary, 2)) / 2);
+            double b = Math.sqrt((-1 * this.real) + Math.sqrt(Math.pow(this.real, 2) + Math.pow(this.imaginary, 2)) / 2);
+            //plus or minus
+            return new ComplexNumber(a, b);
+        }else {
+            if (this.real >= 0) {
+                double a = Math.sqrt(this.real);
+                double b = 0;
+                return new ComplexNumber(a, b);
+            }else{
+                double a = 0;
+                double b = Math.sqrt(-1 * this.real);
+                return new ComplexNumber(a, b);
+            }
+        }
     }
+
     //methods that return a primitive type
     //abs
     public double mag() {
         //returns the magnitude of this (abs)
         //|(𝑎 + 𝑏𝑖)| = √(𝑎^2 + 𝑏^2)
-
-        double mag = 0;
-        return mag;
+        return Math.sqrt(Math.pow(this.real, 2) + Math.pow(this.imaginary, 2));
     }
     //comparator
     public boolean equals(ComplexNumber rhs) {
