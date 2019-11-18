@@ -24,8 +24,6 @@ public class ComplexNumber {
     //variables
     private double real;
     private double imaginary;
-    private double a;
-    private double b;
 
 
     //constructors
@@ -36,10 +34,12 @@ public class ComplexNumber {
     }
     public ComplexNumber(double _r, double _i) {
         //constructs a complex number _r + _ii
-
+        this.real = _r;
+        this.imaginary = _i;
     }
     public ComplexNumber(ComplexNumber rhs) {
         //constructs a complex number rhs.r + rhs.ii
+
 
     }
 
@@ -62,6 +62,7 @@ public class ComplexNumber {
 
     //methods that return a ComplexNumber type
     //arithmetic functions
+    /*
     public ComplexNumber add(ComplexNumber rhs) {
         //add rhs to this
         //(𝑎 + 𝑏𝑖) + (𝑐 + 𝑑𝑖) = (𝑎 + 𝑐) + (𝑏 + 𝑑)
@@ -96,13 +97,15 @@ public class ComplexNumber {
                 //√(𝑎 + 𝑏𝑖) = (±√𝑎 + 0𝑖)
             //if a < 0:
                 //√(𝑎 + 𝑏𝑖) = (0 ± √−𝑎𝑖)
-    }
 
+    }
+    */
     //methods that return a primitive type
     //abs
     public double mag() {
         //returns the magnitude of this (abs)
         //|(𝑎 + 𝑏𝑖)| = √(𝑎^2 + 𝑏^2)
+
         double mag = 0;
         return mag;
     }
@@ -110,6 +113,7 @@ public class ComplexNumber {
     public boolean equals(ComplexNumber rhs) {
         //returns true if this is equal to rhs, false otherwise
         //(𝑎 + 𝑏𝑖) = (𝑐 + 𝑑𝑖) → (𝑎 = 𝑐) & (𝑏 = 𝑑)
+
         boolean equality = true;
         return equality;
     }
@@ -120,7 +124,11 @@ public class ComplexNumber {
         //returns a String formatted as such: 27.3 + 19.7𝑖.
         //Note that if the imaginary part is negative, it should print a – (subtraction) rather than
         //the addition of a negative number. E.g. 27.3 − 19.7𝑖 not 27.3 ± 19.7𝑖.
-        return " + " + "i";
+        if (this.imaginary >= 0) {
+            return this.real + " + " + this.imaginary + "i";
+        }else{
+            return this.real + " - " + Math.abs(this.imaginary) + "i";
+        }
     }
 }
 

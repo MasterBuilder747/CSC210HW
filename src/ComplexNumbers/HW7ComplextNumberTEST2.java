@@ -1,11 +1,23 @@
 package ComplexNumbers;
 
+import java.util.Scanner;
+
 public class HW7ComplextNumberTEST2 {
 
     //DO NOT TURN THIS FILE IN! IT IS ONLY FOR TESTING!!!
     public static void main(String[] args) {
 
-        ComplexNumber c = new ComplexNumber();
+        Scanner kb = new Scanner(System.in);
+
+        ComplexNumber empty = new ComplexNumber();
+        System.out.println(empty.toString());
+        System.out.println("Enter the real number: ");
+        double a = kb.nextDouble();
+        System.out.println("Enter the imaginary number: ");
+        double b = kb.nextDouble();
+
+        ComplexNumber test = new ComplexNumber(a, b);
+        System.out.println(test.toString());
 
     }
 
