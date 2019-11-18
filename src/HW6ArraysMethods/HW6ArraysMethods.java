@@ -1,3 +1,9 @@
+//Homework 6: Arrays & Methods
+//Author: Joseph Audras
+//Professor: Dr. Reinhart
+//Date due: 11-7-19
+//Class: CSC210-1
+
 package HW6ArraysMethods;
 
 import java.util.Random;
