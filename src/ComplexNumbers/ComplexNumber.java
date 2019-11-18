@@ -24,6 +24,8 @@ public class ComplexNumber {
     //variables
     private double real;
     private double imaginary;
+    private double a;
+    private double b;
 
 
     //constructors
@@ -118,8 +120,7 @@ public class ComplexNumber {
         //returns a String formatted as such: 27.3 + 19.7𝑖.
         //Note that if the imaginary part is negative, it should print a – (subtraction) rather than
         //the addition of a negative number. E.g. 27.3 − 19.7𝑖 not 27.3 ± 19.7𝑖.
-        String s = null;
-        return s;
+        return " + " + "i";
     }
 }
 
