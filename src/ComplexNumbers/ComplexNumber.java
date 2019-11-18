@@ -142,11 +142,7 @@ public class ComplexNumber {
     public boolean equals(ComplexNumber rhs) {
         //returns true if this is equal to rhs, false otherwise
         //(𝑎 + 𝑏𝑖) = (𝑐 + 𝑑𝑖) → (𝑎 = 𝑐) & (𝑏 = 𝑑)
-        if (rhs.real == this.real && rhs.imaginary == this.imaginary) {
-            return true;
-        }else{
-            return false;
-        }
+        return rhs.real == this.real && rhs.imaginary == this.imaginary;
     }
 
 
