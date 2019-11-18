@@ -39,8 +39,8 @@ public class ComplexNumber {
     }
     public ComplexNumber(ComplexNumber rhs) {
         //constructs a complex number rhs.r + rhs.ii
-
-
+        this.real = rhs.real;
+        this.imaginary = rhs.imaginary;
     }
 
 
@@ -62,26 +62,37 @@ public class ComplexNumber {
 
     //methods that return a ComplexNumber type
     //arithmetic functions
-    /*
     public ComplexNumber add(ComplexNumber rhs) {
         //add rhs to this
         //(𝑎 + 𝑏𝑖) + (𝑐 + 𝑑𝑖) = (𝑎 + 𝑐) + (𝑏 + 𝑑)
-
+        double r = this.real + rhs.real;
+        double i = this.imaginary + rhs.imaginary;
+        return new ComplexNumber(r, i);
     }
     public ComplexNumber sub(ComplexNumber rhs) {
         //subtracts rhs from this
         //(𝑎 + 𝑏𝑖) − (𝑐 + 𝑑𝑖) = (𝑎 − 𝑐) + (𝑏 − 𝑑)𝑖
-
+        double r = this.real - rhs.real;
+        double i = this.imaginary - rhs.imaginary;
+        return new ComplexNumber(r, i);
     }
     public ComplexNumber mult(ComplexNumber rhs) {
         //multiplies rhs by this
         //(𝑎 + 𝑏𝑖) ∗ (𝑐 + 𝑑𝑖) = (𝑎𝑐 − 𝑏𝑑) + (𝑎𝑑 + 𝑏𝑐)𝑖
-
+        double r = (this.real * rhs.real) - (this.imaginary * rhs.imaginary);
+        double i = (this.real * rhs.imaginary) + (this.imaginary * rhs.real);
+        return new ComplexNumber(r, i);
     }
     public ComplexNumber div(ComplexNumber rhs) throws ArithmeticException {
         //divides this by rhs, throws exception if division by 0 + 0i
         //(𝑎 + 𝑏𝑖)/(𝑐 + 𝑑𝑖) = ((ac + bd)/(c^2 + d^2)) + ((bc - ad)/(c^2 + d^2))i
-
+        if ((Math.pow(this.imaginary, 2) + Math.pow(rhs.imaginary, 2)) == 0) {
+            throw new ArithmeticException();
+        }else {
+            double r = ((this.real * rhs.real) + (this.imaginary * rhs.imaginary)) / (Math.pow(this.imaginary, 2) + Math.pow(rhs.imaginary, 2));
+            double i = ((this.imaginary * rhs.real) - (this.real * rhs.imaginary)) / (Math.pow(this.imaginary, 2) + Math.pow(rhs.imaginary, 2));
+            return new ComplexNumber(r, i);
+        }
     }
     public ComplexNumber conj() {
         //returns the conjugate of this
@@ -99,7 +110,6 @@ public class ComplexNumber {
                 //√(𝑎 + 𝑏𝑖) = (0 ± √−𝑎𝑖)
 
     }
-    */
     //methods that return a primitive type
     //abs
     public double mag() {
@@ -113,9 +123,11 @@ public class ComplexNumber {
     public boolean equals(ComplexNumber rhs) {
         //returns true if this is equal to rhs, false otherwise
         //(𝑎 + 𝑏𝑖) = (𝑐 + 𝑑𝑖) → (𝑎 = 𝑐) & (𝑏 = 𝑑)
-
-        boolean equality = true;
-        return equality;
+        if (rhs.real == this.real && rhs.imaginary == this.imaginary) {
+            return true;
+        }else{
+            return false;
+        }
     }
 
 

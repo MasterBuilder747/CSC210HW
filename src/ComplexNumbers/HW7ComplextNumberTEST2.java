@@ -11,14 +11,23 @@ public class HW7ComplextNumberTEST2 {
 
         ComplexNumber empty = new ComplexNumber();
         System.out.println(empty.toString());
+
+        //add the first complex number
         System.out.println("Enter the real number: ");
         double a = kb.nextDouble();
         System.out.println("Enter the imaginary number: ");
         double b = kb.nextDouble();
-
         ComplexNumber test = new ComplexNumber(a, b);
-        System.out.println(test.toString());
 
+        //add a second complex number
+        System.out.println("Enter the real number: ");
+        a = kb.nextDouble();
+        System.out.println("Enter the imaginary number: ");
+        b = kb.nextDouble();
+        ComplexNumber test2 = new ComplexNumber(a, b);
+        System.out.println(test2.toString());
+
+        System.out.println();
     }
 
 
