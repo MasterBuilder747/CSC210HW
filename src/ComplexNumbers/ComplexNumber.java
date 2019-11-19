@@ -8,29 +8,15 @@ package ComplexNumbers;
 
 public class ComplexNumber {
 
-    /*
-        printing
-        ie 27
-
-       im -13
-
-       27 + -13i
-       27 - 13i
-
-       27 - 13i
-         */
-
     //a + bi, a and b are real numbers, i is an indicator of a complex number, where i^2 = -1
     //variables
-    private double real;
-    private double imaginary;
+    private double real; //a
+    private double imaginary; //b
 
 
     //constructors
     public ComplexNumber() {
         // constructs a complex number 0 + 0i
-        this.real = 0;
-        this.imaginary = 0;
     }
     public ComplexNumber(double _r, double _i) {
         //constructs a complex number _r + _ii
@@ -86,11 +72,20 @@ public class ComplexNumber {
     public ComplexNumber div(ComplexNumber rhs) throws ArithmeticException {
         //divides this by rhs, throws exception if division by 0 + 0i
         //(𝑎 + 𝑏𝑖)/(𝑐 + 𝑑𝑖) = ((ac + bd)/(c^2 + d^2)) + ((bc - ad)/(c^2 + d^2))i
-        if ((Math.pow(this.imaginary, 2) + Math.pow(rhs.imaginary, 2)) == 0) {
+        double a = this.real;
+        double b = this.imaginary;
+        double c = rhs.real;
+        double d = rhs.imaginary;
+        double r = 0;
+        double i = 0;
+
+        try {
+            r = ((a * c) + (b * d)) / (Math.pow(c, 2) + Math.pow(d, 2));
+            i = ((b * c) - (a * d)) / (Math.pow(c, 2) + Math.pow(d, 2));
+            return new ComplexNumber(r, i);
+        }catch (ArithmeticException e) {
             throw new ArithmeticException();
-        }else {
-            double r = ((this.real * rhs.real) + (this.imaginary * rhs.imaginary)) / (Math.pow(this.imaginary, 2) + Math.pow(rhs.imaginary, 2));
-            double i = ((this.imaginary * rhs.real) - (this.real * rhs.imaginary)) / (Math.pow(this.imaginary, 2) + Math.pow(rhs.imaginary, 2));
+        }finally {
             return new ComplexNumber(r, i);
         }
     }
@@ -104,29 +99,26 @@ public class ComplexNumber {
     }
     public ComplexNumber sqrt() {
         //returns the square root of this
-        //if 𝑏 ≠ 0:
-            //√(𝑎 + 𝑏𝑖) = √((𝑎 + √(𝑎^2 + b^2)) / 2) ± √((−𝑎 + √(𝑎^2 + 𝑏^2)) / 2) * 𝑖
-        //if b = 0:
-            //if a >= 0:
-                //√(𝑎 + 𝑏𝑖) = (±√𝑎 + 0𝑖)
-            //if a < 0:
-                //√(𝑎 + 𝑏𝑖) = (0 ± √−𝑎𝑖)
-
-        //NOTE; square root always results in ±
+        double a = this.real;
+        double b = this.imaginary;
         if (this.imaginary != 0) {
-            double a = Math.sqrt(this.real + Math.sqrt(Math.pow(this.real, 2) + Math.pow(this.imaginary, 2)) / 2);
-            double b = Math.sqrt((-1 * this.real) + Math.sqrt(Math.pow(this.real, 2) + Math.pow(this.imaginary, 2)) / 2);
+            //√(𝑎 + 𝑏𝑖) = √((𝑎 + √(𝑎^2 + b^2)) / 2) ± √((−𝑎 + √(𝑎^2 + 𝑏^2)) / 2) * 𝑖
+            double step = Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
+            double r = Math.sqrt((a + step) / 2);
+            double i = Math.sqrt(((-1 * a) + step) / 2);
             //plus or minus
-            return new ComplexNumber(a, b);
+            return new ComplexNumber(r, i);
         }else {
             if (this.real >= 0) {
-                double a = Math.sqrt(this.real);
-                double b = 0;
+                //√(𝑎 + 𝑏𝑖) = (±√𝑎 + 0𝑖)
+                double r = Math.sqrt(this.real);
+                double i = 0;
                 return new ComplexNumber(a, b);
             }else{
-                double a = 0;
-                double b = Math.sqrt(-1 * this.real);
-                return new ComplexNumber(a, b);
+                //√(𝑎 + 𝑏𝑖) = (0 ± √−𝑎𝑖)
+                double r = 0;
+                double i = Math.sqrt(-1 * this.real);
+                return new ComplexNumber(r, i);
             }
         }
     }

@@ -8,6 +8,7 @@ public class HW7ComplextNumberTEST2 {
     public static void main(String[] args) {
 
         Scanner kb = new Scanner(System.in);
+        /*
 
         ComplexNumber empty = new ComplexNumber();
         System.out.println(empty.toString());
@@ -26,8 +27,39 @@ public class HW7ComplextNumberTEST2 {
         b = kb.nextDouble();
         ComplexNumber test2 = new ComplexNumber(a, b);
         System.out.println(test2.toString());
+        */
 
-        System.out.println();
+        ComplexNumber num1 = new ComplexNumber(1, 2);
+        ComplexNumber num2 = new ComplexNumber(3, 4);
+
+        System.out.println(num1.add(num2));
+        System.out.println(num1.sub(num2));
+        System.out.println(num1.mult(num2));
+        //System.out.println(num1.div(num2));
+
+        ComplexNumber result = new ComplexNumber();
+        try {
+            num1 = new ComplexNumber();
+            result = num1.div(num2);
+        }
+        catch (IllegalArgumentException e) {
+            System.out.println(e);
+        }
+        System.out.println(result);
+
+        System.out.println(num1.mag());
+        System.out.println(num1.conj());
+        System.out.println(num1.sqrt());
+        System.out.println(num1.equals(num2));
+
+        num2.setReal(1);
+        num2.setImag(2);
+        System.out.println(num1.equals(num2));
+
+        System.out.println(num1.getReal() + " " + num1.getImag());
+
+
+
     }
 
 
