@@ -69,7 +69,7 @@ public class ComplexNumber {
         double i = (this.real * rhs.imaginary) + (this.imaginary * rhs.real);
         return new ComplexNumber(r, i);
     }
-    public ComplexNumber div(ComplexNumber rhs) throws ArithmeticException {
+    public ComplexNumber div(ComplexNumber rhs) throws IllegalArgumentException {
         //divides this by rhs, throws exception if division by 0 + 0i
         //(𝑎 + 𝑏𝑖)/(𝑐 + 𝑑𝑖) = ((ac + bd)/(c^2 + d^2)) + ((bc - ad)/(c^2 + d^2))i
         double a = this.real;
@@ -79,14 +79,12 @@ public class ComplexNumber {
         double r = 0;
         double i = 0;
 
-        try {
+        if (c != 0 && d != 0) {
             r = ((a * c) + (b * d)) / (Math.pow(c, 2) + Math.pow(d, 2));
             i = ((b * c) - (a * d)) / (Math.pow(c, 2) + Math.pow(d, 2));
             return new ComplexNumber(r, i);
-        }catch (ArithmeticException e) {
-            throw new ArithmeticException();
-        }finally {
-            return new ComplexNumber(r, i);
+        }else{
+            throw new IllegalArgumentException("Divide by zero");
         }
     }
     //other operations that return a complex number
