@@ -8,6 +8,7 @@ public class ComplexNumber {
     //variables
     private double real; //a
     private double imaginary; //b
+    //private int instances; //(finalized is now deprecated)
 
 
     //constructors
