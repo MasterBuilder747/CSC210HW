@@ -1,4 +1,4 @@
-
+//rewritten a bit here for HW8
 
 package HW8MandelbrotSet;
 
