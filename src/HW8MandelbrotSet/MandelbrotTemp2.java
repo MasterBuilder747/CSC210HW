@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 
-public class HW8MandelbrotSet {
+public class MandelbrotTemp2 {
 
     public static void main(String[] args) {
 
