@@ -4,6 +4,22 @@
 //Date due: 12-5-19
 //Class: CSC210-1
 
+/*
+
+-Linear interpolation should be performed using the function you wrote previously, you may copy and paste the code into your Mandelbrot.java class
+-Complex arithmetic is performed using your ComplexNumber class, you may copy it into the package for this assignment
+
+Zn+1 = Zn^2 + C
+where c is a complex number
+
+does magnitude of Zn tend to infinity?
+
+INPUT: C, complex number (class)
+PROCESS: does Zn+1 = Zn^2 + C tend to infinity?
+OUTPUT: true/false
+
+*/
+
 package HW8MandelbrotSet;
 
 import javax.imageio.ImageIO;
@@ -13,11 +29,28 @@ import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 
-public class HW8MandelbrotSet {
+public class HW8Temp {
 
     public static void main(String[] args) {
+        //test the image writer method, disabled now
+        /*
+        Random r = new Random();
+        //generate an image of 256 by 256 random pixel numbers from 0 to 255
+        int[][] img = new int[255][255];
+        for (int i = 0; i < 255; i++) {
+            for (int j = 0; j < 255; j++) {
+                img[i][j] = r.nextInt(255);
+            }
+        }
+        try {
+            ImageWrite(img, "random_image.png");
+        } catch (IOException e) {
+            System.out.println("Improper file path.");
+        }
+        */
 
 
+        //this tests the mandelbrot object to see if the complex number inputted is a set
         try (Scanner kb = new Scanner(System.in)) {
 
             /*
@@ -28,6 +61,7 @@ public class HW8MandelbrotSet {
              */
 
             //ask the user for the size of the image
+
             System.out.println("image width: ");
             int width = kb.nextInt();
             System.out.println("image height: ");
@@ -37,6 +71,29 @@ public class HW8MandelbrotSet {
             }else {
                 //create the array with the size of the image that is specified
                 int[][] img = new int[width][height];
+
+                //input and set the two complex numbers
+                /*
+                System.out.println("=Linear Interpolation with Two Complex Numbers=");
+                System.out.println("First Complex Number: ");
+                System.out.println("Input real part: ");
+                double real = kb.nextDouble();
+                System.out.println("Input imaginary part: ");
+                double imag = kb.nextDouble();
+                ComplexNumber c1 = new ComplexNumber(real, imag);
+                */
+                //System.out.println("First Complex Number is: " + c1);
+                /*
+                System.out.println("Second Complex Number: ");
+                System.out.println("Input real part: ");
+                real = kb.nextDouble();
+                System.out.println("Input imaginary part: ");
+                imag = kb.nextDouble();
+                ComplexNumber c2 = new ComplexNumber(real, imag);
+                System.out.println("Second Complex Number is: " + c2);
+                System.out.println(Mandelbrot.inSet(c1));
+                System.out.println(Mandelbrot.inSet(c2));
+                */
 
                 ComplexNumber c1 = new ComplexNumber(-2, -1);
                 ComplexNumber c2 = new ComplexNumber(1, 1);
@@ -67,7 +124,7 @@ public class HW8MandelbrotSet {
                 for(int i = 0; i < width; i++) {
                     for(int j = 0; j < height; j++) {
 
-                        //linear interpolation done depending on the position
+                        //linear interpolation
                         double real = (j - width/2.0) * 4.0 / width;
                         double imag = (i - height/2.0) * 4.0 / width;
 
