@@ -27,11 +27,13 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Random;
+import java.util.Scanner;
 
 public class HW8MandelbrotSet {
 
     public static void main(String[] args) {
-        //test the image writer method
+        //test the image writer method, disabled now
+        /*
         Random r = new Random();
         //generate an image of 256 by 256 random pixel numbers from 0 to 255
         int[][] img = new int[255][255];
@@ -45,36 +47,65 @@ public class HW8MandelbrotSet {
         } catch (IOException e) {
             System.out.println("Improper file path.");
         }
+        */
 
 
-
-        /*
         //this tests the mandelbrot object to see if the complex number inputted is a set
-        try (Scanner s = new Scanner(System.in)) {
+        try (Scanner kb = new Scanner(System.in)) {
 
+            /*
+            PROCESS RUNDOWN:
+            1) Linearlly interpolate the complex numbers into coordinates
+            2) compute the number of iterations using the mandelbrot object inSet method
+            3) output the array into an image and store it
+             */
+
+            //ask the user for the size of the image
+
+            System.out.println("image width: ");
+            int w = kb.nextInt();
+            System.out.println("image height: ");
+            int h = kb.nextInt();
+            if (w <= 0 || h <= 0) {
+                throw new ArithmeticException("Value must be a natural number.");
+            }else {
+                //create the array with the size of the image that is specified
+                int[][] img = new int[w][h];
+
+            //input and set the two complex numbers
             System.out.println("=Linear Interpolation with Two Complex Numbers=");
             System.out.println("First Complex Number: ");
             System.out.println("Input real part: ");
-            double r = s.nextDouble();
-            System.out.println("Input imaginary part");
-            double i = s.nextDouble();
-            ComplexNumber c1 = new ComplexNumber(r, i);
+            double real = kb.nextDouble();
+            System.out.println("Input imaginary part: ");
+            double imag = kb.nextDouble();
+            ComplexNumber c1 = new ComplexNumber(real, imag);
             System.out.println("First Complex Number is: " + c1);
 
             System.out.println("Second Complex Number: ");
             System.out.println("Input real part: ");
-            r = s.nextDouble();
+            real = kb.nextDouble();
             System.out.println("Input imaginary part: ");
-            i = s.nextDouble();
-            ComplexNumber c2 = new ComplexNumber(r, i);
+            imag = kb.nextDouble();
+            ComplexNumber c2 = new ComplexNumber(real, imag);
             System.out.println("Second Complex Number is: " + c2);
-
-            System.out.println(Mandelbrot.inSet(c1)); //can be called without constructing, since it is a static function
+            System.out.println(Mandelbrot.inSet(c1));
             System.out.println(Mandelbrot.inSet(c2));
+
+            //linear interpolation to map two complex numbers
+
+
+                for(int i = 0; i < w; i++) {
+                    for(int j = 0; j < h; j++) {
+                        img[i][j] = Mandelbrot.inSet(c1);
+                    }
+                }
+
+            }
+
         } catch (Exception e) {
             System.out.println("Invalid input.");
         }
-        */
     }
 
     public static void ImageWrite(int[][] img, String filename) throws IOException
@@ -98,6 +129,7 @@ public class HW8MandelbrotSet {
         catch (IOException e) {
             throw e;
         }
+
     }
 
 }

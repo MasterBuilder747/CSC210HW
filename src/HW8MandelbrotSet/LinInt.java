@@ -20,7 +20,7 @@ public class LinInt {
         //no parameter is redundant and does not do anything
     }
 
-    LinInt(int seed, double min, double max) {
+    LinInt(double min, double max) {
 
         this.seed = seed;
         Random r = new Random (seed);
