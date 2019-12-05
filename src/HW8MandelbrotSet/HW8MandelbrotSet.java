@@ -22,12 +22,33 @@ OUTPUT: true/false
 
 package HW8MandelbrotSet;
 
-import java.util.Scanner;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.Random;
 
 public class HW8MandelbrotSet {
 
     public static void main(String[] args) {
+        //test the image writer method
+        Random r = new Random();
+        //generate an image of 256 by 256 random pixel numbers from 0 to 255
+        int[][] img = new int[255][255];
+        for (int i = 0; i < 255; i++) {
+            for (int j = 0; j < 255; j++) {
+                img[i][j] = r.nextInt(255);
+            }
+        }
+        try {
+            ImageWrite(img, "random_image.png");
+        } catch (IOException e) {
+            System.out.println("Improper file path.");
+        }
 
+
+
+        /*
         //this tests the mandelbrot object to see if the complex number inputted is a set
         try (Scanner s = new Scanner(System.in)) {
 
@@ -53,7 +74,30 @@ public class HW8MandelbrotSet {
         } catch (Exception e) {
             System.out.println("Invalid input.");
         }
+        */
+    }
 
+    public static void ImageWrite(int[][] img, String filename) throws IOException
+    {
+        try {
+            BufferedImage bi = new BufferedImage(img[0].length, img.length, BufferedImage.TYPE_INT_RGB);
+
+            // -- prepare output image
+            for (int i = 0; i < bi.getHeight(); ++i) {
+                for (int j = 0; j < bi.getWidth(); ++j) {
+                    int pixel =	(img[i][j] << 16) | (img[i][j] << 8) | (img[i][j]);
+//	    			int pixel =	((int)(Math.random() * 255) << 16) | (img[i][j] << 8) | (img[i][j]);
+                    bi.setRGB(j, i, pixel);
+                }
+            }
+
+            // -- write output image
+            File outputfile = new File(filename);
+            ImageIO.write(bi, "png", outputfile);
+        }
+        catch (IOException e) {
+            throw e;
+        }
     }
 
 }
