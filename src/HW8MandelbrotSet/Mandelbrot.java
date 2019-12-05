@@ -27,7 +27,4 @@ public class Mandelbrot {
         return count;
     }
 
-
-
-
 }
