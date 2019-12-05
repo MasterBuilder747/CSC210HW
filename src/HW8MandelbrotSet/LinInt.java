@@ -30,8 +30,6 @@ public class LinInt {
         this.iy1 = 100 * (r.nextDouble());
         this.iy2 = 100 * (r.nextDouble());
 
-        double x1, x2, y1, y2;
-
         if (ix1 > ix2) {
             x1 = ix2;
             x2 = ix1;
