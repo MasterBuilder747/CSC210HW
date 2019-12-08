@@ -10,10 +10,8 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.Random;
-import java.util.Scanner;
 
-public class HW8MandelbrotSet {
+public class MandelbrotSetTemp3 {
 
     public static void main(String[] args) {
 
