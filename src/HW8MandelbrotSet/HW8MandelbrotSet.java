@@ -35,11 +35,14 @@ public class HW8MandelbrotSet {
             */
             //temporary defaults
             //after testing, stick to square aspect ratio only
-            int height = 1024;
-            int width = 1024;
+            //coordinate system is a 3 by 2, so therefore a 3:2 aspect ratio must be used
+            //note that 1:1 can also be used and works fine
+            //do not accept any others
+            int width = 300;
+            int height = 200;
 
-            ComplexNumber c1 = new ComplexNumber();
-            ComplexNumber c2 = new ComplexNumber();
+            ComplexNumber c1 = new ComplexNumber(-2, 1);
+            ComplexNumber c2 = new ComplexNumber(1, -1);
             double x1 = c1.getReal();
             double y1 = c1.getImag();
             double x2 = c2.getReal();
@@ -53,21 +56,26 @@ public class HW8MandelbrotSet {
 
                 System.out.println("Rendering...");
 
+                x1 = -2;
+                y1 = 1;
+                x2 = 1;
+                y2 = -1;
+
                 //full image
                 ComplexNumber gen1;
-                for(int i = 0; i < width; i++) {
-                    for(int j = 0; j < height; j++) {
+                for(double i = 0; i < width; i++) {
+                    for(double j = 0; j < height; j++) {
 
                         //linear interpolation done depending on the position
                         //real = 𝑥 = (𝑥1 + s) * (𝑥2 − 𝑥1)
                         //imag = y = (y1 + s) * (y2 − y1)
-                        double s = 4;
+                        double sx = i/width;
+                        double sy = j/height;
+                        double real = lerp(x1, x2, sx);
+                        double imag = lerp(y1, y2, sy);
 
-                        double real = (x1 + s) * (x2 - x1);
-                        double imag = (y1 + s) * (y2 - y1);
-
-                        gen1 = new ComplexNumber(real, imag);
-                        img[i][j] = Mandelbrot.inSet(gen1);
+                        gen1 = new ComplexNumber(real, imag); //~1.46 = 1, ~0.37 = 81, 0.35 = 255
+                        img[(int)i][(int)j] = Mandelbrot.inSet(gen1);
                     }
                 }
                 try {
@@ -79,16 +87,17 @@ public class HW8MandelbrotSet {
 
                 //zoom1 on the fractal
                 ComplexNumber gen2;
-                for(int i = 0; i < width; i++) {
-                    for(int j = 0; j < height; j++) {
+                for(double i = 0; i < width; i++) {
+                    for(double j = 0; j < height; j++) {
 
                         //linear interpolation done depending on the position
-                        double zoom = 2.0;
-                        double real = (j - width/2.0) * zoom / width;
-                        double imag = (i - height/2.0) * zoom / width;
+                        double sx = i/width;
+                        double sy = j/height;
+                        double real = lerp(x1, x2, sx);
+                        double imag = lerp(y1, y2, sy);
 
-                        gen2 = new ComplexNumber(real, imag);
-                        img[i][j] = Mandelbrot.inSet(gen2);
+                        gen2 = new ComplexNumber(real, imag); //~1.46 = 1, ~0.37 = 81, 0.35 = 255
+                        img[(int)i][(int)j] = Mandelbrot.inSet(gen2);
                     }
                 }
                 try {
@@ -100,17 +109,17 @@ public class HW8MandelbrotSet {
 
                 //zoom2 on the fractal
                 ComplexNumber gen3;
-                for(int i = 0; i < width; i++) {
-                    for(int j = 0; j < height; j++) {
+                for(double i = 0; i < width; i++) {
+                    for(double j = 0; j < height; j++) {
 
                         //linear interpolation done depending on the position
-                        double zoom = 0.4; //4 is the highest, must go lower to be more zoomed in
-                        double x;
-                        double real = (j - width/0.5) * zoom / width; //default: 2, higher: less x, lower: more x
-                        double imag = (i - height/1.9) * zoom / width; //default: 2, higher: less y, lower: more y
+                        double sx = i/width;
+                        double sy = j/height;
+                        double real = lerp(x1, x2, sx);
+                        double imag = lerp(y1, y2, sy);
 
-                        gen3 = new ComplexNumber(real, imag);
-                        img[i][j] = Mandelbrot.inSet(gen3);
+                        gen3 = new ComplexNumber(real, imag); //~1.46 = 1, ~0.37 = 81, 0.35 = 255
+                        img[(int)i][(int)j] = Mandelbrot.inSet(gen3);
                     }
                 }
                 try {
@@ -126,6 +135,15 @@ public class HW8MandelbrotSet {
         }
 
  */
+    }
+
+    public static double lerp(double min, double max, double norm) {
+        return (max - min) * norm + min;
+    }
+
+    public static double lerp2(int n, double c1, double c2, double p1, double p2) {
+        //c = complex number, p = pixel
+        return (((c2 - c1)/(p2 - p1)) * (n - p1)) + c1;
     }
 
     public static void ImageWrite(int[][] img, String filename) throws IOException

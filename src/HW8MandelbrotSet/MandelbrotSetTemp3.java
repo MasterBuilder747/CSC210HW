@@ -33,8 +33,8 @@ public class MandelbrotSetTemp3 {
             */
             //temporary defaults
             //after testing, stick to square aspect ratio only
-            int height = 1024;
-            int width = 1024;
+            int width = 300;
+            int height = 200;
             if (width <= 0 || height <= 0) {
                 throw new ArithmeticException("Value must be a natural number.");
             }else {
@@ -53,8 +53,8 @@ public class MandelbrotSetTemp3 {
                         //imag = y = (y1 + s) * (y2 − y1)
                         double s = 1;
 
-                        double real = (j - (height / 2.0)) * (4.0 / width);
                         double imag = (i - (width / 2.0)) * (4.0 / width);
+                        double real = (j - (height / 2.0)) * (4.0 / height);
 
                         c1 = new ComplexNumber(real, imag);
                         img[i][j] = Mandelbrot.inSet(c1);
