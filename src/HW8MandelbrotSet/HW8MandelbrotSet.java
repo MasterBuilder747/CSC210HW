@@ -37,6 +37,14 @@ public class HW8MandelbrotSet {
             //after testing, stick to square aspect ratio only
             int height = 1024;
             int width = 1024;
+
+            ComplexNumber c1 = new ComplexNumber();
+            ComplexNumber c2 = new ComplexNumber();
+            double x1 = c1.getReal();
+            double y1 = c1.getImag();
+            double x2 = c2.getReal();
+            double y2 = c2.getImag();
+
             if (width <= 0 || height <= 0) {
                 throw new ArithmeticException("Value must be a natural number.");
             }else {
@@ -46,20 +54,20 @@ public class HW8MandelbrotSet {
                 System.out.println("Rendering...");
 
                 //full image
-                ComplexNumber c1;
+                ComplexNumber gen1;
                 for(int i = 0; i < width; i++) {
                     for(int j = 0; j < height; j++) {
 
                         //linear interpolation done depending on the position
                         //real = 𝑥 = (𝑥1 + s) * (𝑥2 − 𝑥1)
                         //imag = y = (y1 + s) * (y2 − y1)
-                        double s = 1;
+                        double s = 4;
 
-                        double real = (j - (height / 2.0)) * (4.0 / width);
-                        double imag = (i - (width / 2.0)) * (4.0 / width);
+                        double real = (x1 + s) * (x2 - x1);
+                        double imag = (y1 + s) * (y2 - y1);
 
-                        c1 = new ComplexNumber(real, imag);
-                        img[i][j] = Mandelbrot.inSet(c1);
+                        gen1 = new ComplexNumber(real, imag);
+                        img[i][j] = Mandelbrot.inSet(gen1);
                     }
                 }
                 try {
@@ -70,7 +78,7 @@ public class HW8MandelbrotSet {
                 System.out.println("Image 1 rendered.");
 
                 //zoom1 on the fractal
-                ComplexNumber c2;
+                ComplexNumber gen2;
                 for(int i = 0; i < width; i++) {
                     for(int j = 0; j < height; j++) {
 
@@ -79,8 +87,8 @@ public class HW8MandelbrotSet {
                         double real = (j - width/2.0) * zoom / width;
                         double imag = (i - height/2.0) * zoom / width;
 
-                        c2 = new ComplexNumber(real, imag);
-                        img[i][j] = Mandelbrot.inSet(c2);
+                        gen2 = new ComplexNumber(real, imag);
+                        img[i][j] = Mandelbrot.inSet(gen2);
                     }
                 }
                 try {
@@ -91,7 +99,7 @@ public class HW8MandelbrotSet {
                 System.out.println("Image 2 rendered.");
 
                 //zoom2 on the fractal
-                ComplexNumber c3;
+                ComplexNumber gen3;
                 for(int i = 0; i < width; i++) {
                     for(int j = 0; j < height; j++) {
 
@@ -101,8 +109,8 @@ public class HW8MandelbrotSet {
                         double real = (j - width/0.5) * zoom / width; //default: 2, higher: less x, lower: more x
                         double imag = (i - height/1.9) * zoom / width; //default: 2, higher: less y, lower: more y
 
-                        c3 = new ComplexNumber(real, imag);
-                        img[i][j] = Mandelbrot.inSet(c3);
+                        gen3 = new ComplexNumber(real, imag);
+                        img[i][j] = Mandelbrot.inSet(gen3);
                     }
                 }
                 try {
