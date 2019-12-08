@@ -37,61 +37,55 @@ public class HW8MandelbrotSet {
                 //create the array with the size of the image that is specified
                 int[][] img = new int[width][height];
 
-                //allow for input for the coordinates from the user
-                //defaults to largest image
-                System.out.println("Generate the window to zoom on: ");
-                System.out.println("*To generate the full image, use -2, -1; 1, 1 for coordinates*");
-                System.out.println("Enter the lower bound coordinates (top left corner): ");
-                System.out.println("X1: ");
-                double r1 = kb.nextDouble();
-                System.out.println("Y1: ");
-                double i1 = kb.nextDouble();
-                System.out.println("Enter the upper bound coordinates (bottom right corner): ");
-                System.out.println("X2: ");
-                double r2 = kb.nextDouble();
-                System.out.println("Y2: ");
-                double i2 = kb.nextDouble();
+                //full image
+                ComplexNumber c1;
+                for(int i = 0; i < width; i++) {
+                    for(int j = 0; j < height; j++) {
 
-                ComplexNumber c1 = new ComplexNumber(r1, i1);
-                ComplexNumber c2 = new ComplexNumber(r2, i2);
+                        //linear interpolation done depending on the position
+                        double real = (j - width/2.0) * 4.0 / width;
+                        double imag = (i - height/2.0) * 4.0 / width;
 
-                //linear interpolation to map two complex numbers
-                Random rn = new Random();
-                double x1 = 0;
-                double x2 = 0;
-                double y1 = 0;
-                double y2 = 0;
-
-                if (c1.getReal() > c2.getReal()) {
-                    x1 = c2.getReal();
-                    x2 = c1.getReal();
-                }else{
-                    x1 = c1.getReal();
-                    x2 = c2.getReal();
+                        c1 = new ComplexNumber(real, imag);
+                        img[i][j] = Mandelbrot.inSet(c1);
+                    }
                 }
-                if (c1.getImag() > c2.getImag()) {
-                    y1 = c2.getImag();
-                    y2 = c1.getImag();
-                }else{
-                    y1 = c1.getImag();
-                    y2 = c2.getImag();
-                }
+                ImageWrite(img, "mandelbrot_fractal.png");
+                System.out.println("Image 1 rendered.");
 
-                ComplexNumber c;
+                //zoom1 on the fractal
+                ComplexNumber c2;
                 for(int i = 0; i < width; i++) {
                     for(int j = 0; j < height; j++) {
 
                         //linear interpolation done depending on the position
                         double zoom = 1.0;
-                        double a1 = 1.0;
                         double real = (j - width/1.0) * zoom / width;
                         double imag = (i - height/1.0) * zoom / width;
 
-                        c = new ComplexNumber(real, imag);
-                        img[i][j] = Mandelbrot.inSet(c);
+                        c2 = new ComplexNumber(real, imag);
+                        img[i][j] = Mandelbrot.inSet(c2);
                     }
                 }
-                ImageWrite(img, "mandelbrot_fractal_zoom.png");
+                ImageWrite(img, "mandelbrot_fractal_zoom1.png");
+                System.out.println("Image 2 rendered.");
+
+                //zoom2 on the fractal
+                ComplexNumber c3;
+                for(int i = 0; i < width; i++) {
+                    for(int j = 0; j < height; j++) {
+
+                        //linear interpolation done depending on the position
+                        double zoom = 1.0;
+                        double real = (j - width/0.5) * zoom / width;
+                        double imag = (i - height/1.5) * zoom / width;
+
+                        c3 = new ComplexNumber(real, imag);
+                        img[i][j] = Mandelbrot.inSet(c3);
+                    }
+                }
+                ImageWrite(img, "mandelbrot_fractal_zoom2.png");
+                System.out.println("Image 3 rendered.");
 
             }
 
