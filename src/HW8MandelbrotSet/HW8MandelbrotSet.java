@@ -47,8 +47,6 @@ public class HW8MandelbrotSet {
                 //create the array with the size of the image that is specified
                 int[][] img = new int[height][width]; //[i][j]
 
-                System.out.println("Rendering...");
-
                 //full image
                 ComplexNumber gen1;
                 for(double i = 0; i < width; i++) {
