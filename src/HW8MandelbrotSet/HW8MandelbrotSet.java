@@ -177,11 +177,12 @@ public class HW8MandelbrotSet {
         return (max - min) * norm + min;
     }
 
-    public static double lerp2(int num, double c1, double c2, double p1, double p2) {
+    public static double lerp2(int x, double y1, double y2, double x1, double x2) {
         // [x0, x1], [y1, y2]
         //map: 0-width/height to 2.5-2.5i
         //num = starting x value
-        return (((c2 - c1)/(p2 - p1)) * (num - p1)) + c1;
+        //map array bounds to complex number bounds
+        return (((y2 - y1)/(x2 - x1)) * (x - x1)) + y1;
     }
 
     public static void ImageWrite(int[][] img, String filename) throws IOException
