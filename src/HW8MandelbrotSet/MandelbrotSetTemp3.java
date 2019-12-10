@@ -39,22 +39,22 @@ public class MandelbrotSetTemp3 {
                 throw new ArithmeticException("Value must be a natural number.");
             }else {
                 //create the array with the size of the image that is specified
-                int[][] img = new int[width][height]; //[i][j]
+                int[][] img = new int[height][width]; //[i][j]
 
                 System.out.println("Rendering...");
 
                 //full image
                 ComplexNumber c1;
-                for(int i = 0; i < width; i++) {
-                    for(int j = 0; j < height; j++) {
+                for(int i = 0; i < height; i++) {
+                    for(int j = 0; j < width; j++) {
 
                         //linear interpolation done depending on the position
                         //real = 𝑥 = (𝑥1 + s) * (𝑥2 − 𝑥1)
                         //imag = y = (y1 + s) * (y2 − y1)
-                        double s = 1;
 
-                        double imag = (i - (width / 2.0)) * (4.0 / width);
-                        double real = (j - (height / 2.0)) * (4.0 / height);
+                        //(max - min) * (i/width) + min
+                        double real = (i - (width / 2.0)) * (4.0 / width);
+                        double imag = (j - (height / 2.0)) * (4.0 / width);
 
                         c1 = new ComplexNumber(real, imag);
                         img[i][j] = Mandelbrot.inSet(c1);

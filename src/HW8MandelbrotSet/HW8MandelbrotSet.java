@@ -39,7 +39,7 @@ public class HW8MandelbrotSet {
             //note that 1:1 can also be used and works fine
             //do not accept any others
             int width = 300;
-            int height = 200;
+            int height = 300;
 
             ComplexNumber c1 = new ComplexNumber(-2, 1);
             ComplexNumber c2 = new ComplexNumber(1, -1);
@@ -52,10 +52,9 @@ public class HW8MandelbrotSet {
                 throw new ArithmeticException("Value must be a natural number.");
             }else {
                 //create the array with the size of the image that is specified
-                int[][] img = new int[width][height]; //[i][j]
+                int[][] img = new int[height][width]; //[i][j]
 
                 System.out.println("Rendering...");
-
                 x1 = -2;
                 y1 = 1;
                 x2 = 1;
@@ -70,20 +69,21 @@ public class HW8MandelbrotSet {
                         //real = 𝑥 = (𝑥1 + s) * (𝑥2 − 𝑥1)
                         //imag = y = (y1 + s) * (y2 − y1)
                         double sx = i/width;
-                        double sy = j/height;
+                        double sy = j/width;
                         double real = lerp(x1, x2, sx);
                         double imag = lerp(y1, y2, sy);
 
                         gen1 = new ComplexNumber(real, imag); //~1.46 = 1, ~0.37 = 81, 0.35 = 255
-                        img[(int)i][(int)j] = Mandelbrot.inSet(gen1);
+                        img[(int)j][(int)i] = Mandelbrot.inSet(gen1);
                     }
                 }
                 try {
                     ImageWrite(img, "mandelbrot_fractal.png");
                 } catch (Exception e) {
                     System.out.println("Error in writing to file.");
+                } finally {
+                    System.out.println("Image 1 rendered.");
                 }
-                System.out.println("Image 1 rendered.");
 
                 //zoom1 on the fractal
                 ComplexNumber gen2;
@@ -104,8 +104,9 @@ public class HW8MandelbrotSet {
                     ImageWrite(img, "mandelbrot_fractal_zoom1.png");
                 } catch (Exception e) {
                     System.out.println("Error in writing to file.");
+                } finally {
+                    System.out.println("Image 2 rendered.");
                 }
-                System.out.println("Image 2 rendered.");
 
                 //zoom2 on the fractal
                 ComplexNumber gen3;
@@ -126,8 +127,9 @@ public class HW8MandelbrotSet {
                     ImageWrite(img, "mandelbrot_fractal_zoom2.png");
                 } catch (Exception e) {
                     System.out.println("Error in writing to file.");
+                } finally {
+                    System.out.println("Image 3 rendered.");
                 }
-                System.out.println("Image 3 rendered.");
             }
 /*
         } catch (Exception e) {
