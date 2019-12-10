@@ -17,7 +17,7 @@ public class HW8MandelbrotSet {
 
     public static void main(String[] args) {
 
-        //try (Scanner kb = new Scanner(System.in)) {
+        try (Scanner kb = new Scanner(System.in)) {
 
             /*
             PROCESS RUNDOWN:
@@ -27,19 +27,13 @@ public class HW8MandelbrotSet {
              */
 
             //ask the user for the size of the image
-            /*
+            System.out.println("=Fractal Generator=");
+            System.out.println("Input the resolution, higher than 4000 is too large: ");
+            System.out.println("*Use a 1:1 ratio so that the zoom factors work better");
             System.out.println("image width: ");
             int width = kb.nextInt();
             System.out.println("image height: ");
             int height = kb.nextInt();
-            */
-            //temporary defaults
-            //after testing, stick to square aspect ratio only
-            //coordinate system is a 3 by 2, so therefore a 3:2 aspect ratio must be used
-            //note that 1:1 can also be used and works fine
-            //do not accept any others
-            int width = 300;
-            int height = 300;
 
             ComplexNumber c1 = new ComplexNumber(-2, 1);
             ComplexNumber c2 = new ComplexNumber(1, -1);
@@ -67,7 +61,7 @@ public class HW8MandelbrotSet {
                         x2 = 1;
                         y2 = -1;
                         double sx = i/width;
-                        double sy = j/width;
+                        double sy = j/height;
                         double real = lerp(x1, x2, sx);
                         double imag = lerp(y1, y2, sy);
 
@@ -83,18 +77,26 @@ public class HW8MandelbrotSet {
                     System.out.println("Image 1 rendered.");
                 }
 
+                //zoom factor variables
+                double x = 0; //the x position of the centerpoint fo the window
+                double y = 0; //the y position of the centerpoint fo the window
+                double R = 0; //the radius of the window out from the position (must be natural)
+
                 //zoom1 on the fractal
                 ComplexNumber gen2;
                 for(double i = 0; i < width; i++) {
                     for(double j = 0; j < height; j++) {
 
-                        //linear interpolation done depending on the position
-                        x1 = -2;
-                        y1 = 1;
-                        x2 = 1;
-                        y2 = -1;
+                        //swirl:
+                        x = -0.7453;
+                        y = 0.1127;
+                        R = 0.00065;
+                        x1 = x - R;
+                        y1 = y + R;
+                        x2 = x + R;
+                        y2 = y - R;
                         double sx = i/width;
-                        double sy = j/width;
+                        double sy = j/height;
                         double real = lerp(x1, x2, sx);
                         double imag = lerp(y1, y2, sy);
 
@@ -115,13 +117,16 @@ public class HW8MandelbrotSet {
                 for(double i = 0; i < width; i++) {
                     for(double j = 0; j < height; j++) {
 
-                        //linear interpolation done depending on the position
-                        x1 = -2;
-                        y1 = 1;
-                        x2 = 1;
-                        y2 = -1;
+                        //cool microbe:
+                        x = -0.748;
+                        y = 0.1;
+                        R = 0.0014;
+                        x1 = x - R;
+                        y1 = y + R;
+                        x2 = x + R;
+                        y2 = y - R;
                         double sx = i/width;
-                        double sy = j/width;
+                        double sy = j/height;
                         double real = lerp(x1, x2, sx);
                         double imag = lerp(y1, y2, sy);
 
@@ -137,21 +142,22 @@ public class HW8MandelbrotSet {
                     System.out.println("Image 3 rendered.");
                 }
             }
-/*
+
         } catch (Exception e) {
             System.out.println("Invalid input.");
         }
 
- */
     }
 
     public static double lerp(double min, double max, double norm) {
         return (max - min) * norm + min;
     }
 
-    public static double lerp2(int n, double c1, double c2, double p1, double p2) {
-        //c = complex number, p = pixel
-        return (((c2 - c1)/(p2 - p1)) * (n - p1)) + c1;
+    public static double lerp2(int num, double c1, double c2, double p1, double p2) {
+        // [x0, x1], [y1, y2]
+        //map: 0-width/height to 2.5-2.5i
+        //num = starting x value
+        return (((c2 - c1)/(p2 - p1)) * (num - p1)) + c1;
     }
 
     public static void ImageWrite(int[][] img, String filename) throws IOException
