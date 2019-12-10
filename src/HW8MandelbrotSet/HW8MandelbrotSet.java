@@ -29,7 +29,6 @@ public class HW8MandelbrotSet {
             //ask the user for the size of the image
             System.out.println("=Fractal Generator=");
             System.out.println("Input the resolution, higher than 4000 is too large: ");
-            System.out.println("*Use a 1:1 ratio so that the zoom factors work better");
             System.out.println("image width: ");
             int width = kb.nextInt();
             System.out.println("image height: ");
@@ -83,14 +82,27 @@ public class HW8MandelbrotSet {
                 double R = 0; //the radius of the window out from the position (must be natural)
 
                 //zoom1 on the fractal
+                System.out.println("Zoomed fractals: ");
+                System.out.println("Enter the center point x: ");
+                x = kb.nextDouble();
+                System.out.println("Enter the center point y: ");
+                y = kb.nextDouble();
+                System.out.println("Enter the radius of the window, cannot be 0 or less: ");
+                R = kb.nextDouble();
+                if (R <= 0) {
+                    throw new ArithmeticException("Wrong input for radius of window on zoom");
+                }
+                /*
+                //swirl: number 2 on website
+                    x = -0.7453;
+                    y = 0.1127;
+                    R = 0.00065;
+                */
+
                 ComplexNumber gen2;
                 for(double i = 0; i < width; i++) {
                     for(double j = 0; j < height; j++) {
 
-                        //swirl:
-                        x = -0.7453;
-                        y = 0.1127;
-                        R = 0.00065;
                         x1 = x - R;
                         y1 = y + R;
                         x2 = x + R;
@@ -112,15 +124,29 @@ public class HW8MandelbrotSet {
                     System.out.println("Image 2 rendered.");
                 }
 
+                //zoom2
+                System.out.println("Zoomed fractal 2: ");
+                System.out.println("Enter the center point x: ");
+                x = kb.nextDouble();
+                System.out.println("Enter the center point y: ");
+                y = kb.nextDouble();
+                System.out.println("Enter the radius of the window, cannot be 0 or less: ");
+                R = kb.nextDouble();
+                if (R <= 0) {
+                    throw new ArithmeticException("Wrong input for radius of window on zoom");
+                }
+                /*
+                //cool microbe: number 8 on website
+                    x = -0.748;
+                    y = 0.1;
+                    R = 0.0014;
+                */
+
                 //zoom2 on the fractal
                 ComplexNumber gen3;
                 for(double i = 0; i < width; i++) {
                     for(double j = 0; j < height; j++) {
 
-                        //cool microbe:
-                        x = -0.748;
-                        y = 0.1;
-                        R = 0.0014;
                         x1 = x - R;
                         y1 = y + R;
                         x2 = x + R;
