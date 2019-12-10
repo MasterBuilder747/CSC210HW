@@ -55,10 +55,6 @@ public class HW8MandelbrotSet {
                 int[][] img = new int[height][width]; //[i][j]
 
                 System.out.println("Rendering...");
-                x1 = -2;
-                y1 = 1;
-                x2 = 1;
-                y2 = -1;
 
                 //full image
                 ComplexNumber gen1;
@@ -66,8 +62,10 @@ public class HW8MandelbrotSet {
                     for(double j = 0; j < height; j++) {
 
                         //linear interpolation done depending on the position
-                        //real = 𝑥 = (𝑥1 + s) * (𝑥2 − 𝑥1)
-                        //imag = y = (y1 + s) * (y2 − y1)
+                        x1 = -2;
+                        y1 = 1;
+                        x2 = 1;
+                        y2 = -1;
                         double sx = i/width;
                         double sy = j/width;
                         double real = lerp(x1, x2, sx);
@@ -91,13 +89,17 @@ public class HW8MandelbrotSet {
                     for(double j = 0; j < height; j++) {
 
                         //linear interpolation done depending on the position
+                        x1 = -2;
+                        y1 = 1;
+                        x2 = 1;
+                        y2 = -1;
                         double sx = i/width;
-                        double sy = j/height;
+                        double sy = j/width;
                         double real = lerp(x1, x2, sx);
                         double imag = lerp(y1, y2, sy);
 
-                        gen2 = new ComplexNumber(real, imag); //~1.46 = 1, ~0.37 = 81, 0.35 = 255
-                        img[(int)i][(int)j] = Mandelbrot.inSet(gen2);
+                        gen1 = new ComplexNumber(real, imag); //~1.46 = 1, ~0.37 = 81, 0.35 = 255
+                        img[(int)j][(int)i] = Mandelbrot.inSet(gen1);
                     }
                 }
                 try {
@@ -114,13 +116,17 @@ public class HW8MandelbrotSet {
                     for(double j = 0; j < height; j++) {
 
                         //linear interpolation done depending on the position
+                        x1 = -2;
+                        y1 = 1;
+                        x2 = 1;
+                        y2 = -1;
                         double sx = i/width;
-                        double sy = j/height;
+                        double sy = j/width;
                         double real = lerp(x1, x2, sx);
                         double imag = lerp(y1, y2, sy);
 
-                        gen3 = new ComplexNumber(real, imag); //~1.46 = 1, ~0.37 = 81, 0.35 = 255
-                        img[(int)i][(int)j] = Mandelbrot.inSet(gen3);
+                        gen1 = new ComplexNumber(real, imag); //~1.46 = 1, ~0.37 = 81, 0.35 = 255
+                        img[(int)j][(int)i] = Mandelbrot.inSet(gen1);
                     }
                 }
                 try {
