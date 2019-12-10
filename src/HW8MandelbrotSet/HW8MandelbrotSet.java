@@ -10,7 +10,6 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.Random;
 import java.util.Scanner;
 
 public class HW8MandelbrotSet {
@@ -52,11 +51,13 @@ public class HW8MandelbrotSet {
                 for(double i = 0; i < width; i++) {
                     for(double j = 0; j < height; j++) {
 
-                        //linear interpolation done depending on the position
-                        x1 = -2;
-                        y1 = 1;
-                        x2 = 1;
-                        y2 = -1;
+                        double x = -0.5;
+                        double y = 0;
+                        double R = 1.5;
+                        x1 = x - R;
+                        y1 = y + R;
+                        x2 = x + R;
+                        y2 = y - R;
                         double sx = i/width;
                         double sy = j/height;
                         double real = lerp(x1, x2, sx);
@@ -92,11 +93,10 @@ public class HW8MandelbrotSet {
                 }
                 /*
                 //swirl: number 2 on website
-                    x = -0.7453;
-                    y = 0.1127;
-                    R = 0.00065;
+                x = -0.7453;
+                y = 0.1127;
+                R = 0.00065;
                 */
-
                 ComplexNumber gen2;
                 for(double i = 0; i < width; i++) {
                     for(double j = 0; j < height; j++) {
@@ -135,9 +135,9 @@ public class HW8MandelbrotSet {
                 }
                 /*
                 //cool microbe: number 8 on website
-                    x = -0.748;
-                    y = 0.1;
-                    R = 0.0014;
+                x = -0.748;
+                y = 0.1;
+                R = 0.0014;
                 */
 
                 //zoom2 on the fractal
